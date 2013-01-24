@@ -1,0 +1,3 @@
+[submodule "lib/libobj"]
+	path = lib/libobj
+	url = file:///home/mogria/Code/libobj
