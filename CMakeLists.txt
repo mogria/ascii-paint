@@ -12,7 +12,7 @@ add_subdirectory(lib)
 include_directories(lib/libobj/include)
 
 add_executable(asciipaint ${ASCIIPAINT_SOURCE_FILES})
-target_link_libraries(asciipaint libobj)
+target_link_libraries(asciipaint libobj ncurses)
 
 # FIND_PATH(CHECK_INCLUDE_DIRS check.h)
 # FIND_LIBRARY(CHECK_LIBRARIES NAMES check)

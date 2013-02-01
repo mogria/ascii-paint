@@ -22,6 +22,7 @@ int main() {
   int ch;
 
   while((ch = getch()) != 'a') {
+    mainwin_onkey(win, ch);
     mainwin_render(win);
     refresh();
   }

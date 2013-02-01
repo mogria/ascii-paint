@@ -15,5 +15,6 @@ END_CLASS;
 CONSTRUCTOR(mainwin_construct);
 DESTRUCTOR(mainwin_destruct);
 void mainwin_render(void *_self);
+void mainwin_onkey(void *_self, int ch);
 
 #endif /* MAINWIN_H */

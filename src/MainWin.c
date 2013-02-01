@@ -20,6 +20,7 @@ CONSTRUCTOR(mainwin_construct) {
 DESTRUCTOR(mainwin_destruct) {
   struct MainWin *self = _self;
   delete(self->statusbar);
+  delete(self->drawingarea);
   delwin(self->win);
 }
 
@@ -37,7 +38,7 @@ static void mainwin_size_changed(struct MainWin *self) {
 
     // resize status bar
     statusbar_set_length(self->statusbar, self->current_x);
-    drawingarea_set_boundary(self->drawingarea, self->current_y, self->current_x, 3, 0);
+    drawingarea_set_boundary(self->drawingarea, self->current_y - 4, self->current_x - 2, 3, 1);
   }
 }
 
@@ -51,4 +52,10 @@ void mainwin_render(void *_self) {
   wrefresh(self->win);
 
   statusbar_render(self->statusbar);
+  drawingarea_render(self->drawingarea);
+}
+
+void mainwin_onkey(void *_self, int ch) {
+  struct MainWin *self = _self;
+  drawingarea_onkey(self->drawingarea);
 }
