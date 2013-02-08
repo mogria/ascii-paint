@@ -25,6 +25,11 @@ void drawingarea_set_boundary(void *_self, size_t height, size_t length, size_t 
   mvwin(self->win, pos_y, pos_x);
 }
 
+void drawingarea_get_size(void *_self, size_t *y, size_t *x) {
+  struct DrawingArea *self = _self;
+  getmaxyx(self->win, *y, *x);
+}
+
 void drawingarea_onkey(void *_self) {
   struct DrawingArea *self = _self;
 }
