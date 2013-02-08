@@ -1,7 +1,9 @@
 #include "Cursor.h"
 
 CONSTRUCTOR(cursor_construct) {
-
+  struct Cursor *self = _self;
+  self->pos_x = 0;
+  self->pos_y = 0;
 }
 
 CONSTRUCTOR(cursor_destruct) {
