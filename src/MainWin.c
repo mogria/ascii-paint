@@ -57,5 +57,5 @@ void mainwin_render(void *_self) {
 
 void mainwin_onkey(void *_self, int ch) {
   struct MainWin *self = _self;
-  drawingarea_onkey(self->drawingarea);
+  drawingarea_onkey(self->drawingarea, ch);
 }
