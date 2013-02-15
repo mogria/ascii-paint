@@ -43,7 +43,7 @@ void cursor_set_color(void *_self, chtype ch) {
 void cursor_draw(void *_self, struct DrawingArea *surface) {
   struct Cursor *self = _self;
   size_t x, y;
-  drawingarea_get_size(surface, &x, &y);
+  drawingarea_get_size(surface, &y, &x);
   self->pos_y %= y;
   self->pos_x %= x;
 
