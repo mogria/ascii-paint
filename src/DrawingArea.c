@@ -22,6 +22,8 @@ void drawingarea_render(void *_self) {
 
 void drawingarea_set_boundary(void *_self, size_t height, size_t length, size_t pos_y, size_t pos_x) {
   struct DrawingArea *self = _self;
+  self->size_x = length;
+  self->size_y = height;
   wresize(self->win, height, length);
   mvwin(self->win, pos_y, pos_x);
 }
@@ -57,4 +59,29 @@ void drawingarea_onkey(void *_self, int ch) {
     cursor_draw(self->cur, self);
   }
 
+}
+
+void drawingarea_from_file(void *_self, const char *filename) {
+  struct DrawingArea *self = _self;
+  FILE *file = fopen(filename, "r");
+  char line[self->size_x];
+  size_t y = 0;
+  while(y < self->size_y && !feof(file))  {
+    fgets(line, self->size_x, file);
+    mvwprintw(self->win, y, 0, "%s", line);
+    y++;
+  }
+  fclose(file);
+}
+
+void drawingarea_to_file(void *_self, const char *filename) {
+  struct DrawingArea *self = _self;
+  FILE *file = fopen(filename, "w");
+  char line[self->size_x];
+  size_t y;
+  for(y = 0; y < self->size_y; y++) {
+    mvwinnstr(self->win, y, 0, line, self->size_x);
+    fputs(line, file);
+  }
+  fclose(file);
 }
