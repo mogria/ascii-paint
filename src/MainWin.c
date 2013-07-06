@@ -1,3 +1,5 @@
+#include <stdlib.h>
+#include <string.h>
 #include "MainWin.h"
 #include "StatusBar.h"
 #include "DrawingArea.h"
@@ -15,6 +17,10 @@ CONSTRUCTOR(mainwin_construct) {
   // create a status bar
   self->statusbar = new(StatusBar);
   self->drawingarea = new(DrawingArea);
+
+  // set default filename
+  self->filename = malloc(9 * sizeof(char));
+  strcpy(self->filename, "Untitled");
 }
 
 DESTRUCTOR(mainwin_destruct) {
@@ -22,6 +28,7 @@ DESTRUCTOR(mainwin_destruct) {
   delete(self->statusbar);
   delete(self->drawingarea);
   delwin(self->win);
+  free(self->filename);
 }
 
 static void mainwin_size_changed(struct MainWin *self) {
@@ -57,5 +64,9 @@ void mainwin_render(void *_self) {
 
 void mainwin_onkey(void *_self, int ch) {
   struct MainWin *self = _self;
-  drawingarea_onkey(self->drawingarea, ch);
+  if(ch == 's') {
+    drawingarea_to_file(self->drawingarea, self->filename);
+  } else {
+    drawingarea_onkey(self->drawingarea, ch);
+  }
 }

@@ -10,6 +10,7 @@ CLASS(MainWin);
   struct DrawingArea *drawingarea;
   size_t current_x;
   size_t current_y;
+  char *filename;
 END_CLASS;
 
 CONSTRUCTOR(mainwin_construct);

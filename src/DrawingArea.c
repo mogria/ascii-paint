@@ -82,6 +82,7 @@ void drawingarea_to_file(void *_self, const char *filename) {
   for(y = 0; y < self->size_y; y++) {
     mvwinnstr(self->win, y, 0, line, self->size_x);
     fputs(line, file);
+    fputc('\n', file);
   }
   fclose(file);
 }
